@@ -11,23 +11,22 @@ def main():
         print(f"The '{chardict.get("char")}' character appears {chardict.get("count")} times")
     print(f"=== End report on {book_path} ===")
 
-
-#    print(f"{chardictlist}")
-#    print(f"characterdict looks like {characterdict}")
-#    print(f"chardlist looks like... {chardictlist}")
-
-def get_word_count(fulltext):
-    wordarray = fulltext.split()
-    return len(wordarray)
-
 def get_full_text(path):
     with open(path) as f:
         return f.read()
 
+
+def get_word_count(fulltext):
+#Create array by splitting words
+    wordarray = fulltext.split()
+#Return word count using length of array
+    return len(wordarray)
+
+
 def count_characters(counttext):
     #convert to lowercase
     lowcharacters = counttext.lower()
-    #create character dictionary using for loop
+    #create character count dictionary
     characterdictionary = {}
     for character in lowcharacters:
         if characterdictionary.get(character) is not None:
@@ -36,18 +35,22 @@ def count_characters(counttext):
             characterdictionary[character] = 1
     return characterdictionary
 
+
 def convert_dict_to_dictlist(charDict):
+#Create new list
     chardlist = []
     for k in charDict:
+#check if the key is an alpha, thn proceed
         if k.isalpha():
+#Create a temporary dictionary to append into the character dictionary list
             tDict = {}
             tDict = {"char": f"{k}", "count": charDict.get(k)}
-#            print(f"tDict set to: {tDict}")
             chardlist.append(tDict)
-#            print(f"chardlist appended, now contains: {chardlist}")
     return chardlist
 
+
 def sort_on(dict):
+#Define the count key for sorting
     return dict["count"]
 
 main()
